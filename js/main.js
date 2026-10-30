@@ -20,8 +20,9 @@
 
   // cabeçalho e menu
   const topo = d.querySelector(".top"), btn = d.querySelector(".menu-btn"), nav = d.getElementById("menu");
-  const rolou = () => topo.classList.toggle("sol", scrollY > 40);
-  addEventListener("scroll", rolou, { passive: true }); rolou();
+  let tick = false;
+  const rolou = () => { tick = false; topo.classList.toggle("sol", scrollY > 40); };
+  addEventListener("scroll", () => { if (!tick) { tick = true; requestAnimationFrame(rolou); } }, { passive: true }); rolou();
   const fecha = () => { nav.classList.remove("aberto"); btn.setAttribute("aria-expanded", "false"); btn.textContent = "Menu"; };
   btn.addEventListener("click", () => {
     const a = nav.classList.toggle("aberto");
@@ -32,7 +33,7 @@
 
   // revelar ao rolar
   const rv = q(".rv");
-  if (reduz || !("IntersectionObserver" in window)) rv.forEach(e => e.classList.add("on"));
+  if (reduz || innerWidth <= 900 || !("IntersectionObserver" in window)) rv.forEach(e => e.classList.add("on"));
   else {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: .12 });
     rv.forEach(e => io.observe(e));
@@ -42,7 +43,8 @@
   const vh = d.getElementById("vhero"), va = d.getElementById("vamb");
   if (reduz) { vh.removeAttribute("autoplay"); vh.pause(); }
   else if ("IntersectionObserver" in window) {
-    new IntersectionObserver(es => es.forEach(e => { const v = e.target; e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }), { threshold: .2 }).observe(va);
+    const io2 = new IntersectionObserver(es => es.forEach(e => { const v = e.target; e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }), { threshold: .2 });
+    io2.observe(va); io2.observe(vh);
   }
 
   // galeria ampliada

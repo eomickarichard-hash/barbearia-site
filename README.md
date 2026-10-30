@@ -16,5 +16,5 @@
 Preços (`R$ 00,00`), durações e textos estão direto no `index.html`, na seção `servicos`. Para a equipe, duplique o bloco `<article class="perfil">` e troque foto e dados.
 
 ## Observações
-- As fotos foram recortadas de uma imagem de baixa resolução; para máxima nitidez, troque por fotos reais em `assets/img` com os mesmos nomes.
+- Cada foto existe em dois tamanhos (`nome.jpg` com 1376 px e `nome-m.jpg` com 720 px, para celular). Ao trocar uma foto, gere as duas versões.
 - As fontes (Fraunces e DM Sans) carregam do Google Fonts; sem internet o site usa fontes do sistema.
