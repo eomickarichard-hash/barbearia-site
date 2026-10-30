@@ -11,10 +11,12 @@ a{color:inherit}
 h1,h2,h3{font-family:var(--f);font-weight:300;line-height:1.05;letter-spacing:-.02em}
 h2{font-size:clamp(2rem,4.6vw,3.8rem)}
 h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em}
-.btn{display:inline-block;background:var(--a);color:var(--o);text-decoration:none;font-weight:500;padding:.9rem 1.6rem;border:1px solid var(--a);transition:background .25s,transform .25s}
-.btn:hover{background:var(--o);color:var(--c);border-color:var(--o)}
+.btn{display:inline-block;background:transparent;color:var(--o);text-decoration:none;font-weight:500;font-size:.95rem;padding:.7rem 1.3rem;border:1px solid var(--o);transition:background .25s,border-color .25s,transform .25s}
+.btn:hover{background:var(--a);border-color:var(--a)}
 .btn:active{transform:translateY(1px)}
-.btn-sm{padding:.5rem 1rem;font-size:.95rem}
+.btn-sm{padding:.45rem .9rem;font-size:.9rem}
+.agendar-m{display:none}
+.dir{display:flex;gap:.6rem;align-items:center}
 .link{color:var(--o);text-decoration:none;border-bottom:1px solid var(--ah);padding-bottom:2px;transition:color .2s,border-color .2s}
 .link:hover{color:var(--ah)}
 /* topo */
@@ -83,10 +85,8 @@ dialog button{position:absolute;background:none;border:1px solid var(--m);color:
 .amb-txt{max-width:36rem}.amb-txt p{margin-top:1rem}
 .amb-img{width:min(26vw,22rem);aspect-ratio:3/4;border:1px solid var(--m)}
 /* cta e contato */
-.cta{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding:clamp(4rem,9vw,8rem) var(--p);background:var(--a)}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding:clamp(4rem,9vw,8rem) var(--p);background:var(--g);border-top:1px solid #3a3b38}
 .cta h2{max-width:48rem;font-size:clamp(1.7rem,3.6vw,3rem)}
-.cta .btn{background:var(--o);color:var(--c);border-color:var(--o)}
-.cta .btn:hover{background:var(--c);color:var(--o);border-color:var(--c)}
 .contato{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,5vw,5rem);padding:clamp(4rem,9vw,8rem) var(--p)}
 .contato h2{grid-column:1/-1}
 dl div{padding:1rem 0;border-top:1px solid var(--g)}
@@ -98,29 +98,37 @@ dd a{color:var(--ah)}
 footer{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:1.5rem;padding:3rem var(--p) 5rem;border-top:1px solid var(--g);color:var(--m);font-size:.95rem}
 footer nav{display:flex;gap:1.2rem}footer a{text-decoration:none}
 footer p:last-child{grid-column:1/-1}
-.fixo{display:none}
 /* revelar */
 .js .rv{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
 .js .rv.on{opacity:1;transform:none}
 /* tablet e celular */
 @media(max-width:900px){
- .menu-btn{display:block}
+ .top{background:var(--c)}
+ .menu-btn{display:block;position:relative;z-index:60}
+ .agendar-m{display:inline-block}
+ .top nav .btn{display:none}
  .top nav{position:fixed;inset:0 0 0 auto;width:min(78vw,22rem);flex-direction:column;align-items:flex-start;justify-content:center;gap:1.4rem;padding:2rem;background:var(--c);border-left:1px solid var(--g);transform:translateX(100%);visibility:hidden;transition:transform .4s,visibility .4s}
  .top nav.aberto{transform:none;visibility:visible}
  .top nav a:not(.btn){font-size:1.5rem;font-family:var(--f)}
- .menu-btn{position:relative;z-index:60}
+ .hero{display:block;min-height:0;padding:0 0 3rem}
+ .hero video{position:static;width:100%;height:auto;aspect-ratio:16/9;margin-top:3.6rem}
+ .hero::after,.lateral,.ambiente::after{display:none}
+ .hero-in{padding:2rem var(--p) 0}
+ .hero h1{font-size:clamp(2.6rem,12vw,4rem)}
  .filosofia,.equipe,.contato{grid-template-columns:1fr}
  .filosofia figure{margin-bottom:0}
- .srv{grid-template-columns:7rem 1fr;row-gap:.8rem}
- .srv .meta{grid-column:2;align-items:flex-start;flex-direction:row;gap:1rem;align-items:baseline}
- .srv .link{grid-column:2;justify-self:start}
- .grade{grid-template-columns:repeat(2,1fr);grid-auto-rows:42vw}
- .g{grid-area:auto!important}.g1,.g5{grid-column:span 2!important}
- .ambiente{flex-direction:column;align-items:flex-start;justify-content:flex-end}
- .amb-img{width:55vw}
- .lateral{display:none}
- .hero::after{background:rgba(17,17,16,.62)}
- footer{grid-template-columns:1fr}
- .fixo{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;text-align:center;padding-bottom:calc(.9rem + env(safe-area-inset-bottom,0px))}
+ .filosofia img,.perfil img{aspect-ratio:auto}
+ .srv{grid-template-columns:1fr;gap:.8rem}
+ .srv img{aspect-ratio:auto}
+ .srv .meta{flex-direction:row;align-items:baseline;gap:1rem}
+ .srv .link{justify-self:start}
+ .grade{display:block;columns:2;column-gap:.5rem}
+ .g{display:block;width:100%;margin:0 0 .5rem;break-inside:avoid}
+ .g img{height:auto}
+ .ambiente{display:block;min-height:0;padding:0 0 var(--p)}
+ .ambiente video{position:static;width:100%;height:auto;aspect-ratio:16/9}
+ .amb-txt{padding:2rem var(--p) 0}
+ .amb-img{width:calc(100% - 2*var(--p));margin:1.5rem var(--p) 0;aspect-ratio:auto}
+ footer{grid-template-columns:1fr;padding-bottom:3rem}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1;transform:none}}
